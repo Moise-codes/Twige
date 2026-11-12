@@ -37,3 +37,19 @@ def get_schools():
      "total" : len(schools),
       "schools" :  schools
     }
+
+
+
+@app.get("/api/v1/schools/{school_id}")
+def get_school(school_id : int ):
+  for school in schools :
+
+    if school_id == school["id"] :
+      return {
+        "school" : school
+      }
+
+  raise HTTPException(
+          status_code  = 404,
+          detail = "School not found"
+        )
