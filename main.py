@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI , HTTPException
 
 app = FastAPI(
   title = "Twige API",
@@ -13,3 +13,27 @@ def home():
     "message" : "Welcome to Twige SchoolMIS",
     "status" : "running"
   }
+
+schools = [
+    {
+      "id" : 1,
+      "name" : "Rwanda Coding Academy",
+      "location" : "Nyabihu",
+      "email" : "rca@ac.rw"
+    },
+
+    {
+      "id" : 2,
+      "name" : "Kagarama SS",
+      "location" : "Kigali",
+      "email" : "kagarama@co"
+    }
+
+  ]
+
+@app.get("/api/v1/schools")
+def get_schools():
+    return {
+     "total" : len(schools),
+      "schools" :  schools
+    }
