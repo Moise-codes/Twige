@@ -1,6 +1,6 @@
 from fastapi import FastAPI , HTTPException
 
-from pydantic import BaseModel , EmailStr
+from pydantic import BaseModel , EmailStr , Field
 
 
 app = FastAPI(
@@ -61,8 +61,8 @@ def get_school(school_id : int ):
 
 
 class SchoolCreate(BaseModel):
-  name : str
-  location : str
+  name : str = Field(min_length = 2 , max_length = 100)
+  location : str = Field(min_length = 2, max_length = 100)
   email : EmailStr
 
 
@@ -77,8 +77,8 @@ def create_school(school : SchoolCreate):
 
 
 class SchoolUpdate(BaseModel):
- name : str
- location : str
+ name : str = Field(min_length = 2 , max_length = 100)
+ location : str = Field(min_length = 2,  max_length = 100)
  email :  EmailStr
 
 
