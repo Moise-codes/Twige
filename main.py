@@ -73,3 +73,29 @@ def create_school(school : SchoolCreate):
   new_school["id"] = len(schools) + 1
   schools.append(new_school)
   return new_school
+
+
+
+class SchoolUpdate(BaseModel):
+ name : str
+ location : str
+ email : str
+
+
+
+@app.put("/api/v1/schools/{school_id}")
+
+def update_school(school_id : int , updated_school : SchoolUpdate):
+  for school in schools:
+     school["id"] == school_id
+     new_data = updated_school.model_dump()
+
+     school.update(new_data)
+
+     return school
+
+     raise HTTPException(
+
+      status_code = 404,
+      detail = "School not found"
+     )
