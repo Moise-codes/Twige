@@ -67,7 +67,7 @@ class SchoolCreate(BaseModel):
 
 
 
-@app.post("/api/v1/schools")
+@app.post("/api/v1/schools",status_code = 201)
 def create_school(school : SchoolCreate):
   new_school = school.model_dump()
   new_school["id"] = len(schools) + 1
