@@ -99,3 +99,22 @@ def update_school(school_id : int , updated_school : SchoolUpdate):
       status_code = 404,
       detail = "School not found"
      )
+
+
+
+
+@app.delete("/api/v1/schools/{school_id}")
+def delete_school(school_id : int):
+ for school in schools:
+  if school["id"] == school_id:
+    schools.remove(school)
+
+    return {
+
+      "message" : "School deleted successfully!"
+    }
+
+  raise HTTPException(
+    status_code = 404,
+    detail = "School not found"
+  )
