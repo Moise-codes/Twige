@@ -1,9 +1,13 @@
 from fastapi import FastAPI , HTTPException
 
+from pydantic import BaseModel
+
+
 app = FastAPI(
   title = "Twige API",
   description = "Twige School Management Information System",
   version = "1.0.0"
+
 
 )
 
@@ -53,3 +57,19 @@ def get_school(school_id : int ):
           status_code  = 404,
           detail = "School not found"
         )
+
+
+
+class SchoolCreate(BaseModel):
+  name : str
+  location : str
+  email : str
+
+
+
+@app.post("/api/v1/schools")
+def create_school(school : SchoolCreate):
+  new_school = school.model_dump()
+  new_school["id"] = len(schools) + 1
+  schools.append(new_school)
+  return new_school
